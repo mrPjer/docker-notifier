@@ -13,14 +13,20 @@ const service = client.notify.v1.services(process.env.TWILIO_NOTIFICATION_SERVIC
 let message = 'We have new delicious mozzarella pizza!';
 let title = 'Pizza Time!';
 
+service.bindings.list().then(function(response) {
+
+		  console.log(response);
+});
+
 // Send a notification 
 service.notifications.create({
-  'tag':'mozzarella',
+  'tag':'all',
   'title': title,
   'body': message,
   'gcm': JSON.stringify({ data: { title: title, message: message}})
 }).then(function(response) {
   console.log('Notified!');
+  console.log(response);
 }).catch(function(error) {
   console.log(error);
 });
