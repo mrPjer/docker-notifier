@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Twilio = require('twilio');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8989;
 
 const app = express();
 
@@ -67,19 +67,16 @@ app.post('/messenger', (req, res, next) => {
   let to = req.body.To;
   let response = '';
 
-  // check if any option was chosen in the message
-  let selected = getSelectedOptions(message);
-  if (selected.length === 0) {
-    // if not reply with the standard message
-    response = getOptionsMessage();
-  } else {
-    // if they chose something, register binding. use the ID as username for now.
-    response = `Thanks. We will notify you as soon as possible!`;
-    selected.push('secret');
-    let address = from.replace('Messenger:', '');
-    let endpoint = `fb:inbox:${address}`;
-    registerBinding(endpoint, address, 'facebook-messenger', address, selected);
-  }
+  // if they chose something, register binding. use the ID as username for now.
+  response = `We've registered you to the Docker notification services! You will get notified when the JacobsHack Docker containers change state!`;
+  let selected = 'secret';
+  let address = from.replace('Messenger:', '');
+  let endpoint = `fb:inbox:${address}`;
+  registerBinding(endpoint, address, 'facebook-messenger', address, selected).then(function(response) {
+    console.log(response);
+  }).catch(function(error) {
+    console.log(error);
+  });
 
   client.messages.create({
     from: to,
