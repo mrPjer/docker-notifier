@@ -3,5 +3,6 @@ RUN \
   apt update && \
   apt -y upgrade && \
   apt install -y docker.io nodejs
-COPY index.js /app/alexa-server
-CMD /bin/bash
+COPY alexa-server/index.js /app/alexa-server/index.js
+EXPOSE 80
+CMD nodejs /app/alexa-server/index.js
