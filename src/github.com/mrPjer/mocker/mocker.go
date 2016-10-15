@@ -3,6 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"net/smtp"
+	"net/http"
+	"net/url"
+	"strings"
+	"log"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
@@ -39,4 +44,48 @@ func main() {
 
 func handleContainerEvent(name, image, id, action string) {
 	fmt.Printf("Name: %s (%s)\tID: %s\tAction: %s\n", name, image, id, action)
+	sendToNotifier(name, image, id, action)
+}
+
+func sendToNotifier(name, image, id, action string) {
+	endpoint:= "http://localhost:9999"
+	hc := http.Client{}
+
+	form := url.Values{}
+	form.Add("name", name)
+	form.Add("image", image)
+	form.Add("id", id)
+	form.Add("action", action)
+
+	req, err := http.NewRequest("POST", endpoint, strings.NewReader(form.Encode()))
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err2 := hc.Do(req)
+
+	if err2 != nil {
+		log.Fatal(err)
+	}
+}
+
+func sendEmail(name, image, id, action string) {
+	auth := smtp.PlainAuth(
+		"",
+		"user@email.com",
+		"password",
+		"mail.server.com",
+	)
+	err := smtp.SendMail(
+		"mail.server.com:25",
+		auth,
+		"sender@example.org",
+		[]string{"recipient@example.net"},
+		[]byte("This is the email body"),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
