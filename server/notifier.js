@@ -14,7 +14,6 @@ const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUT
 // Create a reference to the user notification service
 const service = client.notify.v1.services(process.env.TWILIO_NOTIFICATION_SERVICE_SID);
 
-let message = 'We got a new Docker notification!';
 let title = 'Docker Time!';
 
 var sendMessage = function(title, message) {
@@ -48,6 +47,7 @@ app.post('/', function(req, res) {
 
 	console.log(container);
 	res.send("ok");
+	var message = container.name + " (" + container.image + ") changed state to " + container.action;
 	sendMessage(title, message);
 });
 
