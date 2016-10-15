@@ -3,6 +3,26 @@ Docker Notifier
 
 Docker Notifier is a simple Docker container that forwards your Docker events to your favorite endpoint!
 
+Usage
+-----
+
+First, build the container by cloning the repo and running:
+
+`docker build -t docker-notifier .`
+
+To run Docker Notifier, run the container on the same system for which you want the events to propagate from. Mount docker.sock into the container and set up the API keys with environment variables.
+
+```
+docker run \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-p 80:80 \
+	-env TWILLIO_ACCOUNT_SID=*your_twillio_account_sid*
+	-env TWILLIO_AUTH_TOKEN=*your_twillio_auth_token*
+	-env TWILLIO_NOTIFICATION_SERVICE_SID=*your_twillio_notification_service_sid*
+	--restart-policy always
+	docker-notifier
+```
+
 Supported endpoints
 -------------------
 
