@@ -11,6 +11,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
+	"github.com/ashwanthkumar/slack-go-webhook"
 )
 
 func main() {
@@ -87,5 +88,18 @@ func sendEmail(name, image, id, action string) {
 	)
 	if err != nil {
 		log.Fatal(err)
+	}
+}
+
+func sendToSlack(slackWebhook, message string) {
+	payload := slack.Payload {
+		Text: message,
+		Username: "jacobsHack! Docker notifier",
+	}
+
+	err := slack.Send(slackWebhook, "", payload)
+
+	if len(err) > 0 {
+		fmt.Printf("Slack error: %s\n", err)
 	}
 }
