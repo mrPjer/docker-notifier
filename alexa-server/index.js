@@ -36,5 +36,5 @@ http.createServer(function (req, res) {
 	}else{
 		res.end('works');
 	}
-}).listen(80, "0.0.0.0");
+}).listen(31337, "0.0.0.0");
 

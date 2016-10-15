@@ -18,5 +18,5 @@ RUN \
   go get -x github.com/mrPjer/mocker && \
   go build github.com/mrPjer/mocker
 
-EXPOSE 80
+EXPOSE 31337
 CMD nodejs /app/alexa-server/index.js
