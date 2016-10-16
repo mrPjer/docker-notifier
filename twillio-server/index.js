@@ -82,7 +82,7 @@ app.post('/messenger', (req, res, next) => {
             });
             response.on('end', function () {
                 response = 'Statuses are: ' + str;
-		sendFBMessage(to, from, response);
+		sendFBMessage(to, from, response, res);
             });
         }).end();
   }else if(message == 'start'){
@@ -94,7 +94,7 @@ app.post('/messenger', (req, res, next) => {
             });
             response.on('end', function () {
                 response = 'Starting containers: ' + str;
-		sendFBMessage(to, from, response);
+		sendFBMessage(to, from, response, res);
             });
         }).end();
   }else if(message == 'stop'){
@@ -106,7 +106,7 @@ app.post('/messenger', (req, res, next) => {
             });
             response.on('end', function () {
                 response = 'Stopping containers: ' + str;
-		sendFBMessage(to, from, response);
+		sendFBMessage(to, from, response, res);
             });
         }).end();
   }else if(message == 'restart'){
@@ -118,9 +118,11 @@ app.post('/messenger', (req, res, next) => {
             });
             response.on('end', function () {
                 response = 'Restarting containers: ' + str;
-		sendFBMessage(to, from, response);
+		sendFBMessage(to, from, response, res);
             });
         }).end();
+  }else{
+	sendFBMessage(to, from, 'We`ve registered you to the Docker notification services! You will get notified when the JacobsHack Docker containers change state!', res);
   }
   let selected = 'secret';
   let address = from.replace('Messenger:', '');
@@ -133,7 +135,7 @@ app.post('/messenger', (req, res, next) => {
 
 });
 
-function sendFBMessage(to, from, response){
+function sendFBMessage(to, from, response, res){
   client.messages.create({
     from: to,
     to: from,
