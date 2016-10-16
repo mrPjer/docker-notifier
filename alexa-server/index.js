@@ -5,7 +5,7 @@ http.createServer(function (req, res) {
 	if(req.url == '/status'){
 		exec('docker ps --all --format="{{.Names}} {{.Status}}"', function(error, stdout, stderr){
 			var response = stdout.replace(/\n/g, ', ').slice(0, -2) + '.';
-			response = response.replace(/docker-notifier .*?,/, '');
+			response = response.replace(/docker\-notifier .*?,/, '');
 			response = response.replace(/\(.*?\)/g, '');
 			res.end(response);
 		});
