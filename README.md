@@ -15,6 +15,7 @@ To run Docker Notifier, run the container on the same system for which you want 
 ```
 docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
+   -p 8989:8989 \
 	-p 31337:31337 \
 	-env TWILLIO_ACCOUNT_SID=*your_twillio_account_sid*
 	-env TWILLIO_AUTH_TOKEN=*your_twillio_auth_token*
@@ -45,7 +46,7 @@ Facebook Messenger over Twillio set up
 To enable sending notifications to Facebook Messenger, you need the following:
 
 * A Facebook page from which the messages will be sent
-	* The page needs to be configured on Twillio under Programmable SMS -> Settings -> General and the request URL needs to point to the domain where you deployed the application and the endpoint messenger (i.e. *http://yourdomain.com/messenger*)
+	* The page needs to be configured on Twillio under Programmable SMS -> Settings -> General and the request URL needs to point to the domain where you deployed the application and the endpoint messenger (i.e. *http://yourdomain.com:8989/messenger*)
 * Twillio Notify with Facebook Messenger support enabled
 	* A Notify service configured with your Facebook Messenger page
 		* The service SID of that service

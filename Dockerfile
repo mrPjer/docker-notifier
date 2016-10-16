@@ -5,6 +5,7 @@ RUN \
   apt install -y \
     docker.io \
     nodejs \
+    npm \
     wget && \
   wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz && \
   tar -zxvf  go1.7.1.linux-amd64.tar.gz -C /usr/local/
@@ -21,5 +22,15 @@ RUN \
   go get -x github.com/mrPjer/mocker && \
   go build github.com/mrPjer/mocker
 
+COPY twillio-server/package.json /app/twillio/package.json
+WORKDIR /app/twillio
+RUN npm install
+
+COPY twillio-server /app/twillio
+
 EXPOSE 31337
-CMD /app/listener/src/mocker && nodejs /app/alexa-server/index.js
+CMD \
+  /app/listener/src/mocker && \
+  nodejs /app/twillio-server/index.js && \
+  nodejs /app/twillio-server/notifier.js && \
+  nodejs /app/alexa-server/index.js
