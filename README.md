@@ -19,9 +19,10 @@ docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-p 8989:8989 \
 	-p 31337:31337 \
-	-env TWILLIO_ACCOUNT_SID=*your_twillio_account_sid* \
-	-env TWILLIO_AUTH_TOKEN=*your_twillio_auth_token* \
-	-env TWILLIO_NOTIFICATION_SERVICE_SID=*your_twillio_notification_service_sid* \
+	-env TWILLIO_ACCOUNT_SID=your_twillio_account_sid \
+	-env TWILLIO_AUTH_TOKEN=your_twillio_auth_token \
+	-env TWILLIO_NOTIFICATION_SERVICE_SID=your_twillio_notification_service_sid \
+	-env SLACK_ENDPOINT=your_slack_integration_url \
 	--restart-policy always \
 	docker-notifier
 ```
@@ -30,7 +31,7 @@ Supported endpoints
 -------------------
 
 * Facebook Messenger (via [Twillio](https://www.twilio.com/))
-* Slack
+* Slack (via a custom *Incoming WebHook* integration)
 
 Manually running the event listener
 -----------------------------------
@@ -54,6 +55,11 @@ To enable sending notifications to Facebook Messenger, you need the following:
 		* The service SID of that service
 
 Once set up, users have to send a message to your Facebook page, at which point they will get registered for notifications. Afterwards, any Docker events will be propagated to your users via Facebook Messenger.
+
+Slack set up
+------------
+
+To get messages on a Slack channel, create a new *Incoming WebHooks* Custom Integration and provide the URL as the SLACK_ENDPOINT environment variable.
 
 Amazon Alexa set up
 -------------------

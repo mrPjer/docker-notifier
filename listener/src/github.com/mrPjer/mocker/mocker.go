@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"context"
 	"fmt"
 	"net/smtp"
@@ -44,8 +45,14 @@ func main() {
 }
 
 func handleContainerEvent(name, image, id, action string) {
+	var slackEndpoint = os.Getenv("SLACK_ENDPOINT")
+
 	fmt.Printf("Name: %s (%s)\tID: %s\tAction: %s\n", name, image, id, action)
 	sendToNotifier(name, image, id, action)
+
+	var slackMessage = name + " (" + image + ") changed state to " + action
+
+	sendToSlack(slackEndpoint, slackMessage)
 }
 
 func sendToNotifier(name, image, id, action string) {
