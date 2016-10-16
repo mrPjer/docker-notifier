@@ -1,7 +1,9 @@
-Docker Notifier
-===============
+Docker Notifier mit Alexa Stimmenkontrolle
+==========================================
 
 Docker Notifier is a simple Docker container that forwards your Docker events to your favorite endpoint!
+
+Using [Amazon Alexa](https://developer.amazon.com/alexa), Docker Notifier allows you to use your voice to start, stop and restart your containers!
 
 Usage
 -----
