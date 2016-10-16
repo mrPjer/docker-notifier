@@ -7,8 +7,9 @@ RUN \
     nodejs \
     wget && \
   wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz && \
-  tar -zxvf  go1.7.1.linux-amd64.tar.gz -C /usr/local/ && \
-  echo "export PATH=$PATH:/usr/local/go/bin" > /etc/profile
+  tar -zxvf  go1.7.1.linux-amd64.tar.gz -C /usr/local/
+
+ENV PATH $PATH:/usr/local/go/bin
 
 COPY alexa-server/index.js /app/alexa-server/index.js
 
@@ -21,4 +22,4 @@ RUN \
   go build github.com/mrPjer/mocker
 
 EXPOSE 31337
-CMD nodejs /app/alexa-server/index.js
+CMD /app/listener/src/mocker && nodejs /app/alexa-server/index.js
