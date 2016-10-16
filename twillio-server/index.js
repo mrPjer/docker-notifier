@@ -81,8 +81,8 @@ app.post('/messenger', (req, res, next) => {
                 str += chunk;
             });
             response.on('end', function () {
-                response = 'Statuses are: ' + str);
-		 sendFBMessage(to, from, response);
+                response = 'Statuses are: ' + str;
+		sendFBMessage(to, from, response);
             });
         }).end();
   }else if(message == 'start'){
@@ -94,7 +94,7 @@ app.post('/messenger', (req, res, next) => {
             });
             response.on('end', function () {
                 response = 'Starting containers: ' + str;
-		 sendFBMessage(to, from, response);
+		sendFBMessage(to, from, response);
             });
         }).end();
   }else if(message == 'stop'){
