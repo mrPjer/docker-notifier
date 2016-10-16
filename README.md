@@ -16,7 +16,7 @@ To run Docker Notifier, run the container on the same system for which you want 
 docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
    -p 8989:8989 \
-	-p 31337:31337 \
+   -p 31337:31337 \
 	-env TWILLIO_ACCOUNT_SID=*your_twillio_account_sid*
 	-env TWILLIO_AUTH_TOKEN=*your_twillio_auth_token*
 	-env TWILLIO_NOTIFICATION_SERVICE_SID=*your_twillio_notification_service_sid*
