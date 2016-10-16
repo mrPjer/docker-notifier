@@ -5,6 +5,11 @@ require('dotenv').load();
 const express = require('express');
 const bodyParser = require('body-parser');
 const Twilio = require('twilio');
+var http = require('http');
+var options = {
+  host: '37.139.15.23',
+  port: '31337',
+};
 
 const PORT = process.env.PORT || 8989;
 
@@ -68,7 +73,55 @@ app.post('/messenger', (req, res, next) => {
   let response = '';
 
   // if they chose something, register binding. use the ID as username for now.
-  response = `We've registered you to the Docker notification services! You will get notified when the JacobsHack Docker containers change state!`;
+  if(message == 'status'){
+        options.path = '/status';
+        http.request(options, function(response) {
+            var str = '';
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+            response.on('end', function () {
+                response = 'Statuses are: ' + str);
+		 sendFBMessage(to, from, response);
+            });
+        }).end();
+  }else if(message == 'start'){
+        options.path = '/start';
+        http.request(options, function(response) {
+            var str = '';
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+            response.on('end', function () {
+                response = 'Starting containers: ' + str;
+		 sendFBMessage(to, from, response);
+            });
+        }).end();
+  }else if(message == 'stop'){
+        options.path = '/stop';
+        http.request(options, function(response) {
+            var str = '';
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+            response.on('end', function () {
+                response = 'Stopping containers: ' + str;
+		sendFBMessage(to, from, response);
+            });
+        }).end();
+  }else if(message == 'restart'){
+        options.path = '/restart';
+        http.request(options, function(response) {
+            var str = '';
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+            response.on('end', function () {
+                response = 'Restarting containers: ' + str;
+		sendFBMessage(to, from, response);
+            });
+        }).end();
+  }
   let selected = 'secret';
   let address = from.replace('Messenger:', '');
   let endpoint = `fb:inbox:${address}`;
@@ -78,6 +131,9 @@ app.post('/messenger', (req, res, next) => {
     console.log(error);
   });
 
+});
+
+function sendFBMessage(to, from, response){
   client.messages.create({
     from: to,
     to: from,
@@ -89,7 +145,8 @@ app.post('/messenger', (req, res, next) => {
     console.error(err.message);
   });
   res.status(200).send();
-});
+
+}
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
