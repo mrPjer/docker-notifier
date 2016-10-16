@@ -54,3 +54,8 @@ To enable sending notifications to Facebook Messenger, you need the following:
 		* The service SID of that service
 
 Once set up, users have to send a message to your Facebook page, at which point they will get registered for notifications. Afterwards, any Docker events will be propagated to your users via Facebook Messenger.
+
+Amazon Alexa set up
+-------------------
+
+TODO @lstrz
