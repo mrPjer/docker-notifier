@@ -1,7 +1,9 @@
-Docker Notifier
-===============
+Docker Notifier mit Alexa Stimmenkontrolle
+==========================================
 
 Docker Notifier is a simple Docker container that forwards your Docker events to your favorite endpoint!
+
+Using [Amazon Alexa](https://developer.amazon.com/alexa), Docker Notifier allows you to use your voice to start, stop and restart your containers!
 
 Usage
 -----
@@ -17,10 +19,10 @@ docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-p 8989:8989 \
 	-p 31337:31337 \
-	-env TWILLIO_ACCOUNT_SID=*your_twillio_account_sid*
-	-env TWILLIO_AUTH_TOKEN=*your_twillio_auth_token*
-	-env TWILLIO_NOTIFICATION_SERVICE_SID=*your_twillio_notification_service_sid*
-	--restart-policy always
+	-env TWILLIO_ACCOUNT_SID=*your_twillio_account_sid* \
+	-env TWILLIO_AUTH_TOKEN=*your_twillio_auth_token* \
+	-env TWILLIO_NOTIFICATION_SERVICE_SID=*your_twillio_notification_service_sid* \
+	--restart-policy always \
 	docker-notifier
 ```
 
@@ -52,3 +54,8 @@ To enable sending notifications to Facebook Messenger, you need the following:
 		* The service SID of that service
 
 Once set up, users have to send a message to your Facebook page, at which point they will get registered for notifications. Afterwards, any Docker events will be propagated to your users via Facebook Messenger.
+
+Amazon Alexa set up
+-------------------
+
+TODO @lstrz
