@@ -7,7 +7,7 @@ RUN \
     nodejs \
     golang
 
-COPY alexa-server/index.js /app/alexa-server/index.js
+COPY index.js /app/alexa-server/index.js
 
 COPY listener /app/listener
 RUN \
