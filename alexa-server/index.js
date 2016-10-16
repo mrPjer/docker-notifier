@@ -33,6 +33,15 @@ http.createServer(function (req, res) {
                         var containers = stdout.replace(/\n/g, ' ');
                         exec('docker restart ' + containers);
                 });
+	}else if(req.url == '/is_down'){
+		 exec('docker ps --all --filter "status=exited" --format="{{.Names}}"', function(error, stdout, stderr){
+                        var hasAny = stdout.replace(/\n/g, '');
+			if(hasAny == ''){
+				res.end('0');
+			}else{
+				res.end('1');
+			}
+                });
 	}else{
 		res.end('works');
 	}
