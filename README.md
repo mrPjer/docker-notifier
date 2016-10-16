@@ -64,4 +64,16 @@ To get messages on a Slack channel, create a new *Incoming WebHooks* Custom Inte
 Amazon Alexa set up
 -------------------
 
-TODO @lstrz
+It's quite simple to use Alexa with this service!
+
+* Grab your Amazon Echo and connect it to your dev account.
+
+* Follow instructions on [ask-liz](bit.ly/ask-liz) to get an idea of which code to put where.
+
+* The code that you will use is located in the [alexa-server](alexa-server) folder.
+
+* Enjoy the four supported intents:
+	* "Alexa, ask docker about statuses."
+	* "Alexa, tell docker to stop."
+	* "Alexa, tell docker to restart."
+	* "Alexa, tell docker to start."

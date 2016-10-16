@@ -29,8 +29,5 @@ RUN npm install
 COPY twillio-server /app/twillio
 
 EXPOSE 31337
-CMD \
-  /app/listener/src/mocker && \
-  nodejs /app/twillio-server/index.js && \
-  nodejs /app/twillio-server/notifier.js && \
-  nodejs /app/alexa-server/index.js
+COPY start.sh /app/start.sh
+CMD /bin/bash -c /app/start.sh
