@@ -1,0 +1,29 @@
+StatusIntent about status
+StatusIntent about statuses
+StatusIntent for status
+StatusIntent for statuses
+StatusIntent status
+StatusIntent statuses
+
+StartIntent to start containers
+StartIntent to start
+StartIntent start
+StartIntent to start all containers
+StartIntent to start all
+StartIntent start all
+
+StopIntent to stop containers
+StopIntent to stop
+StopIntent stop
+StopIntent to stop all containers
+StopIntent to stop all
+StopIntent stop all
+
+RestartIntent to restart containers
+RestartIntent to restart
+RestartIntent restart
+RestartIntent to restart all containers
+RestartIntent to restart all
+RestartIntent restart all
+
+TestIntent test

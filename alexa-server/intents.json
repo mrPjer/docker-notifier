@@ -1,0 +1,19 @@
+{
+	"intents": [{
+		"intent": "StatusIntent",
+		 "slots": []
+	},{
+		"intent": "StartIntent",
+		 "slots": []
+	},{
+		"intent": "StopIntent",
+		 "slots": []
+	},{
+		"intent": "RestartIntent",
+		 "slots": []
+	},{
+		"intent": "TestIntent",
+		 "slots": []
+	}]
+}
+
