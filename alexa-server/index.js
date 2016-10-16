@@ -4,7 +4,7 @@ var exec = require('child_process').exec;
 http.createServer(function (req, res) {
 	if(req.url == '/status'){
 		exec('docker ps --all --format="{{.Names}} {{.Status}}"', function(error, stdout, stderr){
-			var response = stdout.replace('\n', ', ').slice(0, -1) + '.\n';
+			var response = stdout.replace('\n', ', ').slice(0, -1) + '.';
 			response = response.replace(/docker .*?,/, '');
 			response = response.replace(/\(.*?\)/g, '');
 			res.end(response);
