@@ -20,7 +20,9 @@ RUN \
   export GOPATH=`pwd` && \
   cd src && \
   go get -x github.com/mrPjer/mocker && \
-  go build github.com/mrPjer/mocker
+  go build github.com/mrPjer/mocker && \
+  cd .. && \
+  rm -r pkg src
 
 COPY twillio-server/package.json /app/twillio/package.json
 WORKDIR /app/twillio
