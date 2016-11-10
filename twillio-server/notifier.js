@@ -4,7 +4,6 @@ const PORT = 9999;
 
 var express = require('express');
 var bodyParser = require('body-parser');
-require('dotenv').load();
 
 const twilio = require('twilio');
 
