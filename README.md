@@ -24,6 +24,7 @@ docker run \
 	-env TWILLIO_NOTIFICATION_SERVICE_SID=your_twillio_notification_service_sid \
 	-env SLACK_ENDPOINT=your_slack_integration_url \
 	--restart-policy always \
+   --name docker-notifier
 	docker-notifier
 ```
 
