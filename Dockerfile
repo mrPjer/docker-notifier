@@ -28,6 +28,7 @@ RUN npm install
 
 COPY twillio-server /app/twillio
 
+EXPOSE 8989
 EXPOSE 31337
 COPY start.sh /app/start.sh
 CMD /bin/bash -c /app/start.sh
