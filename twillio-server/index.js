@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const Twilio = require('twilio');
 var http = require('http');
 var options = {
-  host: '37.139.15.23',
+  host: 'localhost',
   port: '31337',
 };
 
